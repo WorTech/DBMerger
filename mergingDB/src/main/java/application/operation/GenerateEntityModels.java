@@ -48,6 +48,7 @@ public class GenerateEntityModels implements CommandLineRunner{
 			}else {
 				entity.setType(EntityType.BAND);
 			}
+			System.out.println(entity);
 			db.save(entity);			
 		}
 		for (Entity entity : db.findAll()) {

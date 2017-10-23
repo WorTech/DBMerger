@@ -1,7 +1,5 @@
 package application.discogsDB.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,60 +11,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Artist {
-	
+
 	@Id
 	private long id;
 	private String name;
+	@JsonProperty("releases_url")
 	private String releasesUrl;
+	@JsonProperty("resource_url")
 	private String resourceUrl;
-	private List<Member> members;
-
-	
-	public Artist() {
-		
-	}
-	public Artist(long id, String name, String releasesUrl, String resourceUrl, List<Member> member) {
-		//super();
-		this.id = id;
-		this.name = name;
-		this.releasesUrl = releasesUrl;
-		this.resourceUrl = resourceUrl;
-		this.members = members;
-	}
-	
-	
+	private Members members;
 
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getReleasesUrl() {
 		return releasesUrl;
 	}
-	public void setReleasesUrl(String releasesUrl) {
-		this.releasesUrl = releasesUrl;
-	}
+
 	public String getResourceUrl() {
 		return resourceUrl;
 	}
-	public void setResourceUrl(String resourceUrl) {
-		this.resourceUrl = resourceUrl;
-	}
-	public List<Member> getMembers() {
+
+	public Members getMembers() {
 		return members;
 	}
-	public void setMembers(List<Member> members) {
-		this.members = members;
-	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
