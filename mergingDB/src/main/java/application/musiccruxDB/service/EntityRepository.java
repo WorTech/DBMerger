@@ -13,5 +13,6 @@ import application.musiccruxDB.model.entity.Entity;
 
 public interface EntityRepository extends MongoRepository<Entity, String> {
 	public Entity findByLabel(String label);
+	public Entity findById(long id);
 	public void deleteAll();
 }

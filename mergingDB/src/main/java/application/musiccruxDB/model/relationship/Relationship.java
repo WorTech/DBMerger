@@ -1,40 +1,42 @@
 package application.musiccruxDB.model.relationship;
+
+import application.musiccruxDB.model.entity.Entity;
+
 public class Relationship {
 	private RelationshipType type;
-	private long sourceEntityIndex;
-	private long targetEntityIndex;
+	private Entity targetEntity, sourceEntity;
 	
 	public Relationship() {}
-	
-	public Relationship(RelationshipType type, long sourceEntityIndex, long targetEntityIndex) {
-		this.type = type;
-		this.sourceEntityIndex = sourceEntityIndex;
-		this.targetEntityIndex = targetEntityIndex;
+
+
+	public Entity getTargetEntity() {
+		return targetEntity;
 	}
+
+
+	public void setTargetEntity(Entity targetEntity) {
+		this.targetEntity = targetEntity;
+	}
+
+
+	public Entity getSourceEntity() {
+		return sourceEntity;
+	}
+
+
+	public void setSourceEntity(Entity sourceEntity) {
+		this.sourceEntity = sourceEntity;
+	}
+
 
 	public RelationshipType getType() {
 		return type;
 	}
-
+	
 	public void setType(RelationshipType type) {
-		this.type = type;
+		this.type=type;
 	}
 
-	public long getSource() {
-		return sourceEntityIndex;
-	}
-
-	public void setSource(long sourceEntityIndex) {
-		this.sourceEntityIndex = sourceEntityIndex;
-	}
-
-	public long getTarget() {
-		return targetEntityIndex;
-	}
-
-	public void setTarget(long targetEntityIndex) {
-		this.targetEntityIndex = targetEntityIndex;
-	}
 	
 	
 	

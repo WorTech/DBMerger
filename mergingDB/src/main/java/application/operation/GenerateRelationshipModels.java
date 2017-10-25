@@ -28,19 +28,21 @@ public class GenerateRelationshipModels implements CommandLineRunner{
 	@Autowired
 	private ArtistRepository discogsArtistRepository;
 	@Autowired
+	private EntityRepository entityRepository;
+	@Autowired
 	private RelationshipRepository db;
 	
 	private void constructRelationshipFromArtist() {
 		for (Artist artist : discogsArtistRepository.findAllArtistsWithMembers()) {
-				Relationship relationship = new Relationship();
-				relationship.setType(RelationshipType.MEMBER);
 				long[] Ids = artist.getMembers().getId();
 				
 				for (long id : Ids) {
-					relationship.setSource(id);
-					relationship.setTarget(artist.getId());
+					Relationship relationship = new Relationship();
+					relationship.setType(RelationshipType.MEMBER);
+					relationship.setSourceEntity(entityRepository.findById(id));
+					relationship.setTargetEntity(entityRepository.findById(artist.getId()));
+					db.save(relationship);				
 				}
-				db.save(relationship);				
 		}
 		for (Relationship r : db.findAll()) {
 			System.out.println(r);
