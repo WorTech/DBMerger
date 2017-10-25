@@ -19,7 +19,7 @@ import application.musiccruxDB.service.EntityRepository;
 
 
 @Component
-@Order(value = 1)
+@Order(value = 2)
 public class GenerateEntityModels implements CommandLineRunner{
 
 	//This needs to read the Discogs database.
