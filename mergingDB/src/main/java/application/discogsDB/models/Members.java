@@ -2,30 +2,26 @@ package application.discogsDB.models;
 
 import java.util.Arrays;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * Represents a person that is member of an {@link Artist}.
  * 
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-
 public class Members {
+	
+	private long[] discogs_ids;
+	private String[] names;
 
-	private long[] id;
-	private String[] name;
-
-	public long[] getId() {
-		return id;
+	public long[] getDiscogs_Ids() {
+		return discogs_ids;
 	}
 
-	public String[] getName() {
-		return name;
+	public String[] getNames() {
+		return names;
 	}
 
 	@Override
 	public String toString() {
-		return "Members [id=" + Arrays.toString(id) + ", name=" + Arrays.toString(name) + "]";
+		return "Members [discogs_ids=" + Arrays.toString(discogs_ids) + ", names=" + Arrays.toString(names) + "]";
 	}
 
 }

@@ -1,8 +1,12 @@
 package application.musiccruxDB.models.relationship;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import application.musiccruxDB.models.entity.Entity;
 
 public class Relationship {
+	@Indexed
 	private RelationshipType type;
 	private Entity targetEntity, sourceEntity;
 	

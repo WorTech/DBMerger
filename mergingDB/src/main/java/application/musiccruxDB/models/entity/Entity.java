@@ -1,32 +1,35 @@
 package application.musiccruxDB.models.entity;
 
+import java.math.BigInteger;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Entity {
-	//feel free to change to int or long if that fits your model better
+
 	@Id
-	private long id;
-	
+	private BigInteger id;
+	@Indexed
+	private String label; // artist name, band name, etc
+	@Indexed
 	private EntityType type;
-	
-	//artist name, band name, etc
-	private String label;
 
 	public Entity() {
-		
+
 	}
-	
-	public Entity(long id, EntityType type, String label) {
+
+	public Entity(BigInteger id, EntityType type, String label) {
 		this.id = id;
 		this.type = type;
 		this.label = label;
 	}
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
@@ -48,8 +51,7 @@ public class Entity {
 
 	@Override
 	public String toString() {
-		return "Entity [id=" + id + ", type=" + type + ", label=" + label + "]";
+		return "Entity [id=" + id + ", label=" + label + ", type=" + type + "]";
 	}
-	
-	
+
 }
