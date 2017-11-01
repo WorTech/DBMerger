@@ -6,9 +6,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import application.discogsDB.models.Artist;
-
-public interface ArtistRepository extends MongoRepository<Artist, String> {
-
+public interface DiscogsArtistRepository extends MongoRepository<Artist, String> {
+	
 	public Artist findByName(String name);
 
 	// Checks if an Artist has a members field.

@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 
  */
 
-@Document(collection = "artists")
 
 public final class Artist {
 

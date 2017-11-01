@@ -12,6 +12,17 @@ public abstract class AbstractMongoConfig {
 	private String host, database;
 	private int port;
 
+	public AbstractMongoConfig() {
+		
+	}
+	
+	public AbstractMongoConfig(String host, String database, int port) {
+		super();
+		this.host = host;
+		this.database = database;
+		this.port = port;
+	}
+
 	/**
 	 * Creates MongoDbFactory Common to the MongoDb connections
 	 * 

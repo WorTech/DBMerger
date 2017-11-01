@@ -12,19 +12,20 @@ import application.musiccruxDB.repositories.ArtistRepository;
 import application.musiccruxDB.repositories.EntityRepository;
 
 /**
- * Uses the Entity Repository and generates Artist on entities of type Artist
+ * Uses the Entity Repository and generates a Artist of the entities of type
+ * Artist
  *
  */
 @Component
-@Order(value = 1)
-public class GenerateArtistModels implements CommandLineRunner{
+@Order(value = 2)
+public class GenerateArtistModels implements CommandLineRunner {
 	
 	@Autowired
 	private EntityRepository entityRepository;
-	
+
 	@Autowired
 	private ArtistRepository db;
-	
+
 	/**
 	 * Creates an artist from each of the Entities in the Musiccrux database
 	 * 
@@ -32,11 +33,14 @@ public class GenerateArtistModels implements CommandLineRunner{
 	 */
 	private void constructArtistFromEntity() {
 		for (Entity entity : entityRepository.findByType(EntityType.ARTIST)) {
-			Artist artist = new Artist(entity.getId(), entity.getLabel());
+			//Artist artist = new Artist(entity.getId(), entity.getLabel());
+			Artist artist = new Artist();
+			artist.setEntity(entity);
+			artist.setLabel(entity.getLabel());
 			db.save(artist);
 		}
 	}
-	
+
 	@Override
 	public void run(String... args) throws Exception {
 		constructArtistFromEntity();
