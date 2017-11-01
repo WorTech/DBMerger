@@ -1,7 +1,5 @@
 package application.discogsDB.models;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * Represents an actual artist. In most cases this are musicians, however
  * sound-engineers, producers, and bands etc. may also appear as artists.

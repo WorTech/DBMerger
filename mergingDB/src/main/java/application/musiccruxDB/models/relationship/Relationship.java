@@ -1,7 +1,5 @@
 package application.musiccruxDB.models.relationship;
 
-import java.math.BigInteger;
-
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
