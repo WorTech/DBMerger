@@ -18,7 +18,7 @@ import application.musiccruxDB.repositories.RelationshipRepository;
  * Creates a relationship collection between two entities in the MusicCrux
  */
 @Component
-@Order(value = 3)
+@Order(value = 4)
 public class GenerateRelationshipModels implements CommandLineRunner {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class GenerateRelationshipModels implements CommandLineRunner {
 	 * Note: In the Discogs database, the 'artist' collection contains both bands
 	 * and actual artists.
 	 */
-	private void createBandToArtistRelationship() {
+	private void createArtistToBandRelationship() {
 
 		for (Entity targetEntity : entityRepository.findByType(EntityType.BAND)) {
 
@@ -59,8 +59,33 @@ public class GenerateRelationshipModels implements CommandLineRunner {
 
 		}
 	}
+	
+	private void createBandToArtistRelationship() {
+		
+		for(Entity targetEntity : entityRepository.findByType(EntityType.BAND)) {
+			
+			Artist discogsArtist = discogsArtistRepository.findByName(targetEntity.getLabel());
+			
+			if (discogsArtist != null) {
+				
+				String[] memberLabels = discogsArtist.getMembers().getNames();
+				for (String label : memberLabels) {
+					Entity sourceEntity = entityRepository.findByLabel(label);
+					Relationship relationship = new Relationship();
+					relationship.setTargetEntity(sourceEntity);
+					relationship.setSourceEntity(targetEntity);
+					relationship.setType(RelationshipType.HAS);
+					//System.out.println(relationship.toString());
+					db.save(relationship);
+				}
+				
+			}
+		}
+		
+	}
 
 	public void run(String... args) throws Exception {
+		//DO NOT FORGET TO UNCOMMENT ALL THE COMMANDLINE RUNNERS IN THE OPERATION PACKAGE
 		createBandToArtistRelationship();
 	}
 }

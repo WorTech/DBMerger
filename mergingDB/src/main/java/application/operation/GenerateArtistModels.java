@@ -17,7 +17,7 @@ import application.musiccruxDB.repositories.EntityRepository;
  *
  */
 @Component
-@Order(value = 2)
+@Order(value = 3)
 public class GenerateArtistModels implements CommandLineRunner {
 	
 	@Autowired
@@ -43,7 +43,7 @@ public class GenerateArtistModels implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		constructArtistFromEntity();
+//		constructArtistFromEntity();
 	}
 
 }

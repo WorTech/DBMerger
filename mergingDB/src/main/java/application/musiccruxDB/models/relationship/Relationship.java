@@ -41,4 +41,9 @@ public class Relationship {
 		this.type = type;
 	}
 
+	@Override
+	public String toString() {
+		return "Relationship [type=" + type + ", targetEntity=" + targetEntity + ", sourceEntity=" + sourceEntity + "]";
+	}
+
 }

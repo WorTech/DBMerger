@@ -42,7 +42,7 @@ public class GenerateBandModels implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		constructBandFromEntity();
+//		constructBandFromEntity();
 	}
 
 }
