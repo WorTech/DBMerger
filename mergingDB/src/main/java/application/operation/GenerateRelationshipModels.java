@@ -29,38 +29,41 @@ public class GenerateRelationshipModels implements CommandLineRunner {
 	private RelationshipRepository db;
 
 	/**
+	 * This function leverages the entity collection of the MusicCrux database as
+	 * well as the Discogs "Artist" collection to creates a ARTIST_BAND
+	 * relationship.
+	 * 
 	 * From the entities of type BAND within the MusicCrux database, look through
-	 * the Discogs database for 'artists' which match that entity and create a
-	 * 'member' relationship between the Band and Artist entities
+	 * the Discogs database for 'artists'(actually Bands) which match that entity
+	 * and create a 'ARTIST_BAND' relationship between the Band and Artist entities
 	 * 
 	 * Note: In the Discogs database, the 'artist' collection contains both bands
 	 * and actual artists.
 	 */
-	private void createBandToArtistRelationship() {
+	private void createArtistBandRelationship() {
 
-		for (Entity targetEntity : entityRepository.findByType(EntityType.BAND)) {
+		for (Entity bandEntity : entityRepository.findByType(EntityType.BAND)) {
 
-			Artist discogsArtist = discogsArtistRepository.findByName(targetEntity.getLabel());// Find the band ('artist' in
-																							// discogs)
-			if (discogsArtist != null) {
+			Artist discogsArtist = discogsArtistRepository.findByName(bandEntity.getLabel());// Find the band (marked as 'artist' in discogs)
+
+			if (discogsArtist != null && discogsArtist.getMembers() != null) { // Found an discogsArtist (in reality this is a Band) with members
 
 				String[] memberLabels = discogsArtist.getMembers().getNames();
 				for (String label : memberLabels) {
-					Entity sourceEntity = entityRepository.findByLabel(label);
-					
+					Entity artistEntity = entityRepository.findByLabel(label);
+
 					Relationship relationship = new Relationship();
-					relationship.setTargetEntity(targetEntity);
-					relationship.setSourceEntity(sourceEntity);
-					relationship.setType(RelationshipType.MEMBER);
+					relationship.setEntity1(artistEntity);
+					relationship.setEntity2(bandEntity);
+					relationship.setType(RelationshipType.ARTIST_BAND);
 					db.save(relationship);
+					System.out.println(" (ARTIST_BAND) relationship made between " + label + " AND " + bandEntity.getLabel() );
 				}
-
 			}
-
 		}
 	}
 
 	public void run(String... args) throws Exception {
-		createBandToArtistRelationship();
+		createArtistBandRelationship();
 	}
 }
